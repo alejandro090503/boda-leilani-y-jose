@@ -16,18 +16,18 @@
 <script>if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Pinyon+Script&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f4f1ea;
-  --surface:#e6dbc9;
-  --card:#fdfbf6;
+  --bg:#fdfcfa;
+  --surface:#f4efe3;
+  --card:#ffffff;
   --accent:#a58c78;
   --dark:#33281e;
   --text:#3A3028;
   --gold:#9c7a3c;
   --gold-light:#e8cb91;
-  --blush:#f4f1ea;
+  --blush:#fdfcfa;
   --border:rgba(156,122,60,.38);
   --border-light:rgba(156,122,60,.2);
   /* paneles con bordes difuminados (fade a --bg arriba y abajo) */
@@ -38,6 +38,16 @@
 /* ── DORADO METÁLICO ── */
 .gold-metal{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#9c7a3c}
 .gold-frame{border:1px solid transparent;border-image:var(--gold-grad) 1}
+/* ── INTRO (estilo referencia: logo + nombres completos) ── */
+.intro-card{position:relative}
+.intro-logo{display:block;width:clamp(150px,46vw,200px);height:auto;margin:0 auto 8px;filter:drop-shadow(0 6px 18px rgba(156,122,60,.18))}
+.intro-names{font-size:clamp(31px,8.4vw,44px)!important;line-height:1.12;margin:0}
+.intro-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:32px;color:#b8923f;line-height:1;margin:6px 0;display:block}
+.intro-corner{position:absolute;width:84px;height:84px;pointer-events:none;opacity:.7;z-index:0}
+.ic-tl{top:8px;left:8px}
+.ic-tr{top:8px;right:8px;transform:scaleX(-1)}
+.ic-bl{bottom:8px;left:8px;transform:scaleY(-1)}
+.ic-br{bottom:8px;right:8px;transform:scale(-1)}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{overflow-x:hidden;max-width:100vw}
 html{scroll-behavior:auto}
@@ -51,7 +61,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .env-veil-grad{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(38,30,20,.5) 0%,rgba(38,30,20,.28) 42%,rgba(38,30,20,.62) 100%)}
 .env-overlay{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 32px}
 .env-eyebrow{font-family:'Italiana',serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;color:#e8cb91;opacity:.95;text-shadow:0 1px 8px rgba(0,0,0,.6)}
-.env-mono{font-family:'Great Vibes',cursive;font-size:clamp(54px,16vw,76px);line-height:1.05;color:#fdfbf6;text-shadow:0 2px 18px rgba(0,0,0,.55);margin-top:14px}
+.env-mono{font-family:'Pinyon Script',cursive;font-size:clamp(54px,16vw,76px);line-height:1.05;color:#fdfbf6;text-shadow:0 2px 18px rgba(0,0,0,.55);margin-top:14px}
 .env-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.5em;color:#e8cb91}
 .env-line{width:64px;height:1px;background:linear-gradient(to right,transparent,#e8cb91,transparent);margin:18px auto}
 .env-fecha{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:16px;letter-spacing:2px;color:#fdfbf6;text-shadow:0 1px 8px rgba(0,0,0,.6)}
@@ -78,9 +88,9 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .orn-diamond-sm{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;opacity:.45;margin:0 2px}
 
 /* ── TYPOGRAPHY ── */
-.eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px;display:block}
-.heading{font-family:'Great Vibes',cursive;font-size:56px;text-align:center;line-height:1.16;padding:.04em 0;margin-bottom:6px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#9c7a3c}
-.heading-sm{font-family:'Great Vibes',cursive;font-size:42px;text-align:center;line-height:1.16;padding:.04em 0;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#9c7a3c}
+.eyebrow{font-family:'Cormorant Garamond',serif;font-style:normal;font-weight:600;font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px;line-height:1.7;display:block}
+.heading{font-family:'Pinyon Script',cursive;font-size:56px;text-align:center;line-height:1.16;padding:.04em 0;margin-bottom:6px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#9c7a3c}
+.heading-sm{font-family:'Pinyon Script',cursive;font-size:42px;text-align:center;line-height:1.16;padding:.04em 0;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#9c7a3c}
 .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--accent);text-align:center;margin-bottom:0;opacity:.85;line-height:1.65}
 .italiana{font-family:'Italiana',serif;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark)}
 
@@ -106,7 +116,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .hc-br{bottom:-1px;right:-1px;transform:scale(-1)}
 .hero-content{position:relative;z-index:2;text-align:center;padding:0 32px}
 .hero-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#e8cb91;display:block;margin-bottom:20px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
-.hero-bride,.hero-groom{font-family:'Great Vibes',cursive;font-size:clamp(68px,21vw,94px);color:#fdfbf6;line-height:1;display:block;text-shadow:0 2px 20px rgba(0,0,0,.4),0 1px 6px rgba(0,0,0,.3)}
+.hero-bride,.hero-groom{font-family:'Pinyon Script',cursive;font-size:clamp(68px,21vw,94px);color:#fdfbf6;line-height:1;display:block;text-shadow:0 2px 20px rgba(0,0,0,.4),0 1px 6px rgba(0,0,0,.3)}
 .hero-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:38px;color:#e8cb91;display:block;margin:.12em 0;text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .hero-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:21px;letter-spacing:4px;color:#e8cb91;margin-top:22px;display:block;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 
@@ -128,7 +138,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .fam-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px 14px;text-align:center;position:relative}
 .fam-card::before{content:'';position:absolute;inset:8px;border:1px solid transparent;border-image:var(--gold-grad) 1;pointer-events:none}
 .fam-role-lbl{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:15px;letter-spacing:.05em;color:var(--gold);display:block;margin-bottom:12px}
-.fam-name{font-family:'Great Vibes',cursive;font-size:28px;color:var(--dark);line-height:1.3;display:block}
+.fam-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;letter-spacing:.02em;color:var(--text);line-height:1.4;display:block}
 .fam-and{display:flex;align-items:center;gap:8px;margin:6px 0}
 .fam-and-line{flex:1;height:1px;background:var(--border)}
 .fam-and-txt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--accent)}
@@ -139,7 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .loc-venue-lbl{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
 .loc-divider{height:14px}
-.loc-venue{font-family:'Great Vibes',cursive;font-size:38px;color:var(--dark);text-align:center;line-height:1.1;margin-bottom:18px}
+.loc-venue{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;letter-spacing:.04em;color:var(--text);text-align:center;line-height:1.25;margin-bottom:14px}
 .loc-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(165,140,120,.2);justify-content:center}
 .loc-row:last-of-type{border-bottom:none}
 .loc-icon{width:16px;height:16px;flex-shrink:0;stroke:var(--gold);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
@@ -202,7 +212,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .hotel-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:0;text-align:center;position:relative;overflow:hidden}
 .hotel-card::before{content:'';position:absolute;inset:0;border:1px solid var(--border-light);pointer-events:none;z-index:1;border-radius:4px}
 .hotel-img{width:100%;height:180px;background-size:cover;background-position:center;border-radius:4px 4px 0 0}
-.hotel-name{font-family:'Great Vibes',cursive;font-size:32px;color:var(--dark);line-height:1.2;margin:18px 0 14px;padding:0 16px}
+.hotel-name{font-family:'Pinyon Script',cursive;font-size:32px;color:var(--dark);line-height:1.2;margin:18px 0 14px;padding:0 16px}
 
 /* ── RSVP ── */
 .rsvp-deadline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--gold);margin-bottom:26px;display:block;text-align:center}
@@ -269,7 +279,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 }
 .vinyl-label-text{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Great Vibes',cursive;font-size:11px;color:#e8cb91;
+  font-family:'Pinyon Script',cursive;font-size:11px;color:#e8cb91;
   text-align:center;line-height:1.1;opacity:.85;
   pointer-events:none;width:26px;
 }
@@ -345,7 +355,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
 /* ── INVITACIÓN VERSE ── */
 .invite-verse{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,4vw,18px);line-height:2.1;color:var(--text);text-align:center;opacity:.68;max-width:270px;margin:22px auto 0;padding:18px 6px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);position:relative}
-.invite-verse::before{content:'\201C';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'Great Vibes',cursive;font-size:54px;color:var(--gold);opacity:.2;line-height:1;pointer-events:none}
+.invite-verse::before{content:'\201C';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'Pinyon Script',cursive;font-size:54px;color:var(--gold);opacity:.2;line-height:1;pointer-events:none}
 
 /* ── COUNTDOWN GLOW ── */
 .cd-wrap{position:relative;max-width:380px;margin:0 auto}
@@ -453,7 +463,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 /* ── FOOTER MONOGRAM ── */
 .footer-monogram-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:28px;position:relative;overflow:visible}
 .footer-initials{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;overflow:visible}
-.fi-letter{font-family:'Great Vibes',cursive;font-size:58px;line-height:1.5;padding:12px 24px;margin:-12px -16px;background:linear-gradient(135deg,#D4B896 0%,#9c7a3c 50%,#e8cb91 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fi-letter{font-family:'Pinyon Script',cursive;font-size:58px;line-height:1.5;padding:12px 24px;margin:-12px -16px;background:linear-gradient(135deg,#D4B896 0%,#9c7a3c 50%,#e8cb91 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .fi-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#e8cb91;opacity:.5;align-self:center;margin:0 4px}
 .footer-orn-line{display:flex;align-items:center;gap:10px;opacity:.35}
 .footer-orn-line .fo-line{width:48px;height:1px;background:linear-gradient(to right,transparent,#e8cb91)}
@@ -515,16 +525,19 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
   </section>
 
   <!-- INVITACIÓN -->
-  <section class="sec rv" style="text-align:center;overflow:hidden">
-    <span class="eyebrow stagger-child">Con la bendición de Dios</span>
-    <div class="orn stagger-child"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
-    <h1 class="heading stagger-child">Leilani y José</h1>
-    <p class="sub stagger-child" style="margin-top:8px;font-weight:600;color:var(--gold)">te invitamos a<br>nuestra boda</p>
-    <div class="orn bot stagger-child"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
-    <p class="stagger-child" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--text);line-height:1.8;margin-top:24px;opacity:.9">
-      Sábado, 28 de Noviembre de 2026<br>
-      Morelia, Michoacán
-    </p>
+  <section class="sec rv intro-card" style="text-align:center;overflow:hidden">
+    <span class="intro-corner ic-tl"><svg viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M7 7 C26 19 41 29 57 30" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M7 7 C19 26 29 41 30 57" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M30 21 q9 -7 18 -3 q-7 8 -18 3Z" fill="#c9a24a" opacity=".24"/><path d="M45 26 q9 -6 17 -1 q-8 8 -17 1Z" fill="#c9a24a" opacity=".2"/><path d="M21 30 q-7 9 -3 18 q8 -7 3 -18Z" fill="#c9a24a" opacity=".24"/><path d="M26 45 q-6 9 -1 17 q8 -8 1 -17Z" fill="#c9a24a" opacity=".2"/><g transform="translate(12,12)" stroke="#c9a24a" stroke-width="1" opacity=".62" fill="none"><ellipse cx="0" cy="-7.5" rx="3" ry="6.5"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(72)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(144)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(216)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(288)"/><circle cx="0" cy="0" r="2" fill="#c9a24a"/></g></svg></span>
+    <span class="intro-corner ic-tr"><svg viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M7 7 C26 19 41 29 57 30" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M7 7 C19 26 29 41 30 57" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M30 21 q9 -7 18 -3 q-7 8 -18 3Z" fill="#c9a24a" opacity=".24"/><path d="M45 26 q9 -6 17 -1 q-8 8 -17 1Z" fill="#c9a24a" opacity=".2"/><path d="M21 30 q-7 9 -3 18 q8 -7 3 -18Z" fill="#c9a24a" opacity=".24"/><path d="M26 45 q-6 9 -1 17 q8 -8 1 -17Z" fill="#c9a24a" opacity=".2"/><g transform="translate(12,12)" stroke="#c9a24a" stroke-width="1" opacity=".62" fill="none"><ellipse cx="0" cy="-7.5" rx="3" ry="6.5"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(72)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(144)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(216)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(288)"/><circle cx="0" cy="0" r="2" fill="#c9a24a"/></g></svg></span>
+    <span class="intro-corner ic-bl"><svg viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M7 7 C26 19 41 29 57 30" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M7 7 C19 26 29 41 30 57" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M30 21 q9 -7 18 -3 q-7 8 -18 3Z" fill="#c9a24a" opacity=".24"/><path d="M45 26 q9 -6 17 -1 q-8 8 -17 1Z" fill="#c9a24a" opacity=".2"/><path d="M21 30 q-7 9 -3 18 q8 -7 3 -18Z" fill="#c9a24a" opacity=".24"/><path d="M26 45 q-6 9 -1 17 q8 -8 1 -17Z" fill="#c9a24a" opacity=".2"/><g transform="translate(12,12)" stroke="#c9a24a" stroke-width="1" opacity=".62" fill="none"><ellipse cx="0" cy="-7.5" rx="3" ry="6.5"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(72)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(144)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(216)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(288)"/><circle cx="0" cy="0" r="2" fill="#c9a24a"/></g></svg></span>
+    <span class="intro-corner ic-br"><svg viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M7 7 C26 19 41 29 57 30" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M7 7 C19 26 29 41 30 57" stroke="#c9a24a" stroke-width="1" opacity=".5"/><path d="M30 21 q9 -7 18 -3 q-7 8 -18 3Z" fill="#c9a24a" opacity=".24"/><path d="M45 26 q9 -6 17 -1 q-8 8 -17 1Z" fill="#c9a24a" opacity=".2"/><path d="M21 30 q-7 9 -3 18 q8 -7 3 -18Z" fill="#c9a24a" opacity=".24"/><path d="M26 45 q-6 9 -1 17 q8 -8 1 -17Z" fill="#c9a24a" opacity=".2"/><g transform="translate(12,12)" stroke="#c9a24a" stroke-width="1" opacity=".62" fill="none"><ellipse cx="0" cy="-7.5" rx="3" ry="6.5"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(72)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(144)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(216)"/><ellipse cx="0" cy="-7.5" rx="3" ry="6.5" transform="rotate(288)"/><circle cx="0" cy="0" r="2" fill="#c9a24a"/></g></svg></span>
+    <img class="intro-logo stagger-child" src="logo-le.png" alt="Monograma Leilani y José" width="200" height="246">
+    <span class="eyebrow stagger-child">Con la bendición de Dios<br>y de nuestros padres</span>
+    <h1 class="heading intro-names stagger-child">Leilani Guerrero Ambriz</h1>
+    <span class="intro-amp stagger-child">&amp;</span>
+    <p class="heading intro-names stagger-child">José Emmanuel Rangel Guzmán</p>
+    <span class="eyebrow stagger-child" style="margin-top:22px;font-size:12.5px;letter-spacing:.2em">Tenemos el honor de invitarles<br>a celebrar nuestra unión en matrimonio</span>
+    <div class="orn bot stagger-child" style="margin-top:18px"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
+    <p class="stagger-child" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);line-height:1.7;margin-top:16px">Sábado 28 de Noviembre de 2026</p>
     <p class="invite-verse stagger-child">Con amor en nuestros corazones,<br>los invitamos a ser testigos<br>de la unión de nuestras vidas.</p>
   </section>
 
