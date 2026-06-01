@@ -909,64 +909,33 @@ function initEnvelope(){
   setTimeout(tryAutoMusic, 400);
 })();
 
-/* ── PREMIUM PARTICLES ── */
-function launchPetals(ambient){
-  var container=document.getElementById('petals');
-  var colors=['#9c7a3c','#a58c78','#f4f1ea','#e8cb91'];
-  var count=ambient?6:15;
-
-  /* Petals */
-  for(var i=0;i<count;i++){
-    (function(i){
-      setTimeout(function(){
-        var p=document.createElement('div');p.className='petal';
-        var sz=5+Math.random()*8,col=colors[Math.floor(Math.random()*colors.length)];
-        p.style.cssText='left:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz*1.4+'px;background:'+col+';border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:0;transform:rotate('+Math.random()*360+'deg)';
-        container.appendChild(p);
-        gsap.fromTo(p,{opacity:0,y:-20,x:0,rotation:Math.random()*360},
-          {opacity:.62,y:window.innerHeight+60,x:(Math.random()-.5)*120,rotation:Math.random()*720,
-           duration:5+Math.random()*4,ease:'none',onComplete:function(){p.remove()}});
-      },i*350+Math.random()*450);
-    })(i);
-  }
-
-  /* Gold sparkle diamonds */
-  var sparks=ambient?2:9;
-  for(var j=0;j<sparks;j++){
-    (function(j){
-      setTimeout(function(){
-        var s=document.createElement('div');s.className='petal';
-        var sz=4+Math.random()*6;
-        s.style.cssText='left:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:rgba(232,203,145,0.88);position:absolute;top:-20px;transform:rotate(45deg);border-radius:1px;box-shadow:0 0 '+(sz+3)+'px rgba(156,122,60,0.65)';
-        container.appendChild(s);
-        gsap.fromTo(s,{opacity:0,y:-20,scale:0},{opacity:.88,y:window.innerHeight*0.6,scale:1,rotation:Math.random()*360+180,
-          duration:3+Math.random()*2.5,ease:'power2.out',
-          onComplete:function(){gsap.to(s,{opacity:0,y:'+='+Math.round(window.innerHeight*0.55),duration:2,ease:'power1.in',onComplete:function(){s.remove()}});}});
-      },j*650+Math.random()*900+(ambient?0:300));
-    })(j);
-  }
-
-  /* Gold dust micro-particles */
-  var dust=ambient?8:22;
-  for(var k=0;k<dust;k++){
-    (function(k){
-      setTimeout(function(){
-        var d=document.createElement('div');d.className='petal';
-        var dsz=1.5+Math.random()*2.5,dcol=Math.random()>.5?'rgba(156,122,60,0.85)':'rgba(232,203,145,0.78)';
-        d.style.cssText='left:'+Math.random()*100+'%;width:'+dsz+'px;height:'+dsz+'px;background:'+dcol+';border-radius:50%;position:absolute;top:-10px;box-shadow:0 0 3px '+dcol;
-        container.appendChild(d);
-        gsap.fromTo(d,{opacity:0,y:-10},{opacity:Math.random()*.7+.3,y:window.innerHeight+40,x:(Math.random()-.5)*65,
-          duration:7+Math.random()*5,ease:'none',onComplete:function(){d.remove()}});
-      },k*220+Math.random()*320);
-    })(k);
-  }
+/* ── POLVO DORADO (caída lenta y uniforme) ── */
+function spawnGoldSpeck(container,seed){
+  var d=document.createElement('div');d.className='petal';
+  var sz=1.6+Math.random()*2.6;
+  var golds=['rgba(232,203,145,','rgba(156,122,60,','rgba(212,184,150,'];
+  var c=golds[Math.floor(Math.random()*golds.length)];
+  var op=(0.26+Math.random()*0.34).toFixed(2);
+  d.style.cssText='left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;background:'+c+op+');border-radius:50%;position:absolute;top:0;box-shadow:0 0 '+(sz+2)+'px '+c+'0.35)';
+  container.appendChild(d);
+  var H=window.innerHeight+24;
+  var startY=seed?Math.random()*H:-12;
+  var dur=(14+Math.random()*8)*((H-startY)/H); /* velocidad uniforme: 14-22s de arriba a abajo */
+  gsap.fromTo(d,{y:startY,x:0},{y:H,x:(Math.random()-0.5)*46,duration:Math.max(3,dur),ease:'none',onComplete:function(){d.remove();}});
+}
+function launchGoldDust(){
+  var c=document.getElementById('petals');
+  if(!c)return;
+  /* sembrar a distintas alturas para que no inicie vacío */
+  for(var i=0;i<26;i++) spawnGoldSpeck(c,true);
+  /* emisor continuo y parejo */
+  setInterval(function(){ spawnGoldSpeck(c,false); },450);
 }
 
 /* ── MAIN ── */
 function initMain(){
   window.scrollTo(0,0);
-  launchPetals(false);
-  setInterval(function(){launchPetals(true);},13000);
+  launchGoldDust();
 
   /* Countdown */
   const target=new Date('2026-11-28T16:00:00-06:00');
