@@ -903,7 +903,26 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
 </div>
 
-<!-- PENDIENTE: canción del cliente — al recibir cancion.mp3, restaurar botón de música -->
+<!-- MUSIC (Marianelli — Liz On Top Of The World) -->
+<audio id="bgAudio" loop preload="auto"><source src="cancion.mp3" type="audio/mpeg"></audio>
+<button class="vinyl-btn" id="musicFab" type="button" aria-label="Reproducir música de la invitación">
+  <div class="vinyl-tonearm">
+    <div class="vinyl-tonearm-pivot"></div>
+    <div class="vinyl-tonearm-line"></div>
+    <div class="vinyl-tonearm-head"></div>
+  </div>
+  <div class="vinyl-spin">
+    <div class="vinyl-disc">
+      <div class="vinyl-sheen"></div>
+      <div class="vinyl-label-text">L&amp;E<small>2026</small></div>
+      <div class="vinyl-hole"></div>
+    </div>
+  </div>
+  <div class="vinyl-icons">
+    <svg class="vinyl-icon-play" viewBox="0 0 24 24" fill="#e8cb91" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="vinyl-icon-pause" viewBox="0 0 24 24" fill="#e8cb91" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </div>
+</button>
 <div id="env-flash"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
