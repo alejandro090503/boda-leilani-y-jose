@@ -382,8 +382,12 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .sec-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none;z-index:-1}
 
 /* ── INVITACIÓN VERSE ── */
-.invite-verse{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,4vw,18px);line-height:2.1;color:var(--text);text-align:center;opacity:.68;max-width:270px;margin:22px auto 0;padding:18px 6px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);position:relative}
-.invite-verse::before{content:'\201C';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'Pinyon Script',cursive;font-size:54px;color:var(--gold);opacity:.2;line-height:1;pointer-events:none}
+.invite-verse{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14.5px,3.6vw,16px);line-height:1.85;color:var(--text);text-align:center;opacity:.85;max-width:340px;margin:28px auto 0;padding:30px 8px 22px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);position:relative}
+.invite-verse::before{content:'\201C';position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-family:'Pinyon Script',cursive;font-size:58px;color:var(--gold);opacity:.28;line-height:1;pointer-events:none}
+.invite-verse p{margin:0 auto;max-width:320px}
+.invite-verse p + p{margin-top:14px}
+.invite-verse-rut{font-family:'Pinyon Script',cursive!important;font-style:normal!important;font-size:clamp(22px,5.4vw,26px)!important;color:#6b5121!important;line-height:1.45!important;opacity:1!important;letter-spacing:.01em;margin-bottom:18px!important;padding-bottom:14px;border-bottom:1px solid var(--border-light);max-width:300px!important}
+.invite-verse-end{font-weight:500}
 
 /* ── COUNTDOWN GLOW ── */
 .cd-wrap{position:relative;max-width:380px;margin:0 auto}
@@ -560,7 +564,12 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
     <span class="eyebrow stagger-child" style="margin-top:22px;font-size:12.5px;letter-spacing:.2em">Tenemos el honor de invitarles<br>a celebrar nuestra unión en matrimonio</span>
     <div class="orn bot stagger-child" style="margin-top:18px"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
     <p class="stagger-child" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);line-height:1.7;margin-top:16px">Sábado 28 de Noviembre de 2026</p>
-    <p class="invite-verse stagger-child">Con amor en nuestros corazones,<br>los invitamos a ser testigos<br>de la unión de nuestras vidas.</p>
+    <div class="invite-verse stagger-child">
+      <p class="invite-verse-rut">A dónde tú vayas, iré yo.<br>Dónde tú vivas, viviré yo.<br>Tu pueblo será mi pueblo<br>y tu Dios será mi Dios.</p>
+      <p>Porque el amor no solamente es sentir, es elegir.</p>
+      <p>El amor no promete perfección, promete permanencia, promete quedarse cuando todos se van.</p>
+      <p class="invite-verse-end">Promete elegir el mismo corazón una vez más, porque cuando Dios une dos corazones con verdad, ni el tiempo, ni la distancia los podrá separar.</p>
+    </div>
   </section>
 
   <!-- CUENTA REGRESIVA -->
@@ -625,7 +634,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
       <span class="fam-role-lbl" style="font-size:17px">Nuestros Padrinos</span>
       <div style="margin-top:14px">
         <span class="italiana" style="display:block;font-size:12px;letter-spacing:.22em;color:var(--gold);margin-bottom:8px">Velación</span>
-        <span class="fam-name" style="font-size:24px">Rosa Emilzi Guzmán Chávez</span>
+        <span class="fam-name" style="font-size:24px">Rosa Emiltzi Guzmán Chávez</span>
         <div class="fam-and"><div class="fam-and-line"></div><span class="fam-and-txt">y</span><div class="fam-and-line"></div></div>
         <span class="fam-name" style="font-size:24px">Andrés Medina Ramírez</span>
       </div>
@@ -744,7 +753,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
           <path d="M49 175 L63 175" stroke="url(#dcGoldA)" stroke-width="1.4" stroke-linecap="round"/>
         </svg>
         <span class="dc-fig-ttl">Caballeros</span>
-        <span class="dc-fig-sub">Traje · Smoking</span>
+        <span class="dc-fig-sub">Traje</span>
       </div>
       <!-- Dama: silueta editorial de vestido largo de gala -->
       <div class="dc-fig">
@@ -785,7 +794,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
     </div>
 
     <div class="dc-avoid-wrap rv">
-      <span class="dc-avoid-lbl">Colores reservados</span>
+      <span class="dc-avoid-lbl">Agradecemos evitar estos tonos</span>
       <div class="dc-avoid-row">
         <div class="dc-avoid-sw"><div class="dc-avoid-circle" style="background:#ffffff"></div><span class="dc-avoid-name">Blanco</span></div>
         <div class="dc-avoid-sw"><div class="dc-avoid-circle" style="background:#e62525"></div><span class="dc-avoid-name">Rojo</span></div>
