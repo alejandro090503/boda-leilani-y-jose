@@ -1191,6 +1191,7 @@ function initMain(){
     var urlPases  = (isNaN(rawP) || rawP < 1 || rawP > 20) ? 1 : rawP;
 
     var rsvpChoice  = null;
+    var savedNames  = [];
     var pasesNumEl  = document.getElementById('rsvp-pases-num');
     var fieldsEl    = document.getElementById('rsvp-fields');
     var btnYes      = document.getElementById('btnYes');
@@ -1202,8 +1203,15 @@ function initMain(){
 
     if(!confirmBtn) return;
 
-    if(pasesNumEl) pasesNumEl.textContent = urlPases;
     if(urlPara && rsvpNameEl){ rsvpNameEl.textContent = urlPara; rsvpNameEl.style.display = 'block'; }
+    // Guard silencioso: si hay ?para=, bloqueamos botones hasta saber pases reales del panel
+    if(urlPara){
+      if(pasesNumEl) pasesNumEl.textContent = '…';
+      if(btnYes) btnYes.disabled = true;
+      if(btnNo)  btnNo.disabled  = true;
+    } else {
+      if(pasesNumEl) pasesNumEl.textContent = urlPases;
+    }
 
     function renderFields(count){
       if(!fieldsEl) return;
@@ -1214,6 +1222,8 @@ function initMain(){
         inp.type = 'text';
         inp.placeholder = 'Nombre del invitado ' + (i+1);
         inp.autocomplete = 'off';
+        inp.value = savedNames[i] || '';
+        (function(idx){ inp.addEventListener('input', function(){ savedNames[idx] = this.value; }); })(i);
         fieldsEl.appendChild(inp);
       }
     }
@@ -1234,26 +1244,39 @@ function initMain(){
       }
     }
 
-    /* Pre-fill si ya confirmó antes */
+    /* Guard silencioso: usa pases autoritativos del panel + pre-fill */
     if(urlPara){
       fetch(PANEL_API + '?nombre=' + encodeURIComponent(urlPara) + '&url_boda=' + encodeURIComponent(RSVP_URL))
         .then(function(r){ return r.json(); })
         .then(function(d){
-          if(!d.ok || !d.invitado) return;
-          var inv = d.invitado;
-          if(inv.estado === 'confirmado'){
-            selectRsvp('yes');
-            if(btnText) btnText.textContent = 'Actualizar respuesta';
-            var prev = inv.nombres_confirmados || [];
-            if(prev.length > 0 && fieldsEl){
-              var inputs = fieldsEl.querySelectorAll('input');
-              prev.forEach(function(n,i){ if(inputs[i]) inputs[i].value = n; });
+          if(d && d.ok && d.invitado){
+            var inv = d.invitado;
+            if(typeof inv.pases === 'number' && inv.pases > 0 && inv.pases <= 20){
+              urlPases = inv.pases;  // AUTORITATIVO — ignoramos manipulación de ?pases=
             }
-          } else if(inv.estado === 'declino'){
-            selectRsvp('no');
-            if(btnText) btnText.textContent = 'Actualizar respuesta';
+            if(pasesNumEl) pasesNumEl.textContent = urlPases;
+            if(btnYes) btnYes.disabled = false;
+            if(btnNo)  btnNo.disabled  = false;
+            if(inv.nombres_confirmados && inv.nombres_confirmados.length){
+              savedNames = inv.nombres_confirmados.slice();
+            }
+            if(inv.estado === 'confirmado'){
+              selectRsvp('yes');
+              if(btnText) btnText.textContent = 'Actualizar respuesta';
+            } else if(inv.estado === 'declino'){
+              selectRsvp('no');
+              if(btnText) btnText.textContent = 'Actualizar respuesta';
+            }
+          } else {
+            if(pasesNumEl) pasesNumEl.textContent = urlPases;
+            if(btnYes) btnYes.disabled = false;
+            if(btnNo)  btnNo.disabled  = false;
           }
-        }).catch(function(){});
+        }).catch(function(){
+          if(pasesNumEl) pasesNumEl.textContent = urlPases;
+          if(btnYes) btnYes.disabled = false;
+          if(btnNo)  btnNo.disabled  = false;
+        });
     }
 
     if(frozen){
@@ -1334,6 +1357,34 @@ function initMain(){
 document.addEventListener('DOMContentLoaded',()=>{
   initEnvelope();
 });
+</script>
+<script>
+/* ELYSIUM AUDIO UNLOCK v1 — la musica se estrena DENTRO del primer gesto real del invitado.
+   iOS/Chrome retiran el permiso del gesto a los pocos ms, asi que un play() que corre al
+   terminar el video del sobre llega tarde y es rechazado en silencio. */
+(function(){
+  if(window.__elyAudioUnlock) return; window.__elyAudioUnlock=1;
+  var done=false, tries=0;
+  function A(){ return document.querySelector('audio'); }
+  function unlock(){
+    if(done) return;
+    var a=A(); if(!a) return;
+    try{ if(a.preload==='none'){ a.preload='auto'; a.load(); } }catch(e){}
+    if(!a.paused){ done=true; return; }
+    var p;
+    try{ p=a.play(); }catch(e){ return; }
+    if(p && p.then){ p.then(function(){ done=true; }).catch(function(){}); }
+    else { done=true; }
+  }
+  ['pointerdown','touchstart','touchend','click','keydown'].forEach(function(ev){
+    document.addEventListener(ev, unlock, {capture:true, passive:true});
+  });
+  var iv=setInterval(function(){
+    var a=A();
+    if(done || (a && !a.paused)){ done=true; clearInterval(iv); return; }
+    if(++tries>120) clearInterval(iv);
+  },1000);
+})();
 </script>
 </body>
 </html>
